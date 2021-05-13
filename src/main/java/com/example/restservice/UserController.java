@@ -2,6 +2,7 @@ package com.example.restservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,11 +59,25 @@ public class UserController {
 
     }
 
-    public UserDto updateEmail(UserPatchDto userPatchDto, Integer id) {
+    public UserDto updateVlues(UserPatchDto userPatchDto, Integer id) {
         return userRepository.findById(id).map(o -> {
-            o.setEmail(userPatchDto.getEmail());
+            boolean needUpdate = false;
+
+            if (StringUtils.hasLength(userPatchDto.getEmail())) {
+                o.setEmail(userPatchDto.getEmail());
+                needUpdate = true;
+            }
+            if (StringUtils.hasLength(userPatchDto.getFullName())) {
+                o.setFullName(userPatchDto.getFullName());
+                needUpdate = true;
+            }
+            if (StringUtils.hasLength(userPatchDto.getPassword())) {
+                o.setPassword(userPatchDto.getPassword());
+                needUpdate = true;
+            }
             userRepository.save(o);
             return new UserDto(o);
+
         }).orElse(null);
 
     }

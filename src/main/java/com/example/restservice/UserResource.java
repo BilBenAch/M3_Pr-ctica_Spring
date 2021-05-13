@@ -50,8 +50,8 @@ public class UserResource {
 
     }
     @PatchMapping("/{id}")
-    private UserDto replaceUserEmail(@RequestBody UserPatchDto userPatchDto, @PathVariable Integer id){
-        return userController.updateEmail(userPatchDto, id);
+    private UserDto relaceValues(@RequestBody UserPatchDto userPatchDto, @PathVariable Integer id){
+        return userController.updateVlues(userPatchDto, id);
 
     }
 
