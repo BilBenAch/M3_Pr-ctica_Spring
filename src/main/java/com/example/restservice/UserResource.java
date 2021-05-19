@@ -10,6 +10,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(UserResource.USERS)
 public class UserResource {
+
     public static final String USERS ="/users";
 
     UserController userController;

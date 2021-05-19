@@ -61,19 +61,15 @@ public class UserController {
 
     public UserDto updateVlues(UserPatchDto userPatchDto, Integer id) {
         return userRepository.findById(id).map(o -> {
-            boolean needUpdate = false;
 
             if (StringUtils.hasLength(userPatchDto.getEmail())) {
                 o.setEmail(userPatchDto.getEmail());
-                needUpdate = true;
             }
             if (StringUtils.hasLength(userPatchDto.getFullName())) {
                 o.setFullName(userPatchDto.getFullName());
-                needUpdate = true;
             }
             if (StringUtils.hasLength(userPatchDto.getPassword())) {
                 o.setPassword(userPatchDto.getPassword());
-                needUpdate = true;
             }
             userRepository.save(o);
             return new UserDto(o);
